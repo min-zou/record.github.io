@@ -1,14 +1,13 @@
 ---
 author:
-  name: "Michael Henderson"
+  name: "Xiaox Liu"
 date: 2020-05-08T10:19:42+08:00
 linktitle: Mark_uplook
 type:
 - post
 - posts
 title: Mark_uplook
-draft: false #是否为草稿
-toc: true
+# toc: true
 ---
 # 技术背景
 1. 现有技术的主要内容，如应用途径、主要结构和核心原理

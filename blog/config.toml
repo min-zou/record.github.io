@@ -1,4 +1,4 @@
-baseurl      = "localhost"
+baseurl      = "https://localhost"
 title        = "My Blog"
 languageCode = "en-us"
 theme        = "hello-friend-ng"
@@ -12,10 +12,10 @@ dataDir      = "data"
 layoutDir    = "layouts"
 publishDir   = "public"
 
-buildDrafts  = true
+buildDrafts  = false
 buildFuture  = false
 buildExpired = false
-canonifyURLs = true
+canonifyURLs = false
 
 enableRobotsTXT = true
 enableGitInfo   = false
@@ -30,7 +30,7 @@ disableHugoGeneratorInject = false
   posts = "/posts/:year/:month/:title/"
 
 [author]
-  name = "Jane Doe"
+  name = "Echo Rex"
 
 [blackfriday]
   hrefTargetBlank = true
@@ -67,12 +67,12 @@ disableHugoGeneratorInject = false
     title = "Hello Friend NG"
     subtitle = "A simple theme for Hugo"
     keywords = ""
-    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+    # copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
       logoText = "hello friend ng"
-      logoHomeLink = "/"
+      logoHomeLink = "https://min-zou.github.io/record.github.io"
     # or
     #
     # path = "/img/your-example-logo.svg"
@@ -82,6 +82,7 @@ disableHugoGeneratorInject = false
   [[menu.main]]
     identifier = "blog"
     name       = "Record"
+    pre = "<i class='fa fa-road'></i>"
     url        = "/posts"
   [[menu.main]]
     identifier = "about"
