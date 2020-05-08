@@ -41,7 +41,7 @@ disableHugoGeneratorInject = false
   dateformNumTime = "2006-01-02 15:04 -0700"
 
   # Subtitle for home
-  homeSubtitle = "A simple and beautiful blog"
+  homeSubtitle = "Don't worry , Be happy!"
 
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = true
@@ -64,14 +64,14 @@ disableHugoGeneratorInject = false
 
 [languages]
   [languages.en]
-    title = "Hello Friend NG"
+    title = "Hello World"
     subtitle = "A simple theme for Hugo"
     keywords = ""
     # copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
-      logoText = "hello friend ng"
+      logoText = "Gooooo！"
       logoHomeLink = "https://min-zou.github.io/record.github.io"
     # or
     #
