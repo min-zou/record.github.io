@@ -1,0 +1,3 @@
+[submodule "blog/themes/hello-friend-ng"]
+	path = blog/themes/hello-friend-ng
+	url = git@gitee.com:rex_rex/hugo-theme-hello-friend-ng.git
