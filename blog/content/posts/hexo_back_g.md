@@ -4,7 +4,7 @@ author:
 title: "Generate Blog with Hexo"
 date: 2018-10-23T20:40:11+08:00
 draft: false
-toc: false
+toc: true
 images:
 tags:
   - hexo

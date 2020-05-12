@@ -4,7 +4,7 @@ author:
 title: "Tohugo"
 date: 2020-05-08T14:34:25+08:00
 draft: false
-toc: false
+toc: true
 images:
 tags:
   - hugo
