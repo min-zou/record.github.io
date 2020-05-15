@@ -39,7 +39,7 @@ foreach(ABS_FIL ${ALL_PROTOS})
 
     COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
     ARGS 
-    -I  ${PROJECT_SOURCE_DIR}/${DIR} #源文件中对应头文件的路径为此路径与绝对路径的差值，此处设置可以使得头文件路径直接为文件名
+    -I  ${PROJECT_SOURCE_DIR}/${DIR} #源文件中对应头文件的路径为此路径与绝对路径的差值，此处设置可以使得头文件路径直接为文件名    #是设置检索proto文件的路径，与proto文件之间的调用也相关
     --cpp_out  ${PROJECT_BINARY_DIR}/${DIR} #源文件和头文件的输出路径
     ${ABS_FIL} #绝对路径
     DEPENDS ${ABS_FIL}
@@ -49,6 +49,7 @@ foreach(ABS_FIL ${ALL_PROTOS})
 endforeach()
 set_source_files_properties(${ALL_PROTO_SRCS} ${ALL_PROTO_HDRS} PROPERTIES GENERATED TRUE)
 ```
+另外的，若其他文件有依赖proto头文件的，需要在add_libraries中增加${ALL_PROTO_SRCS}依赖，即会在protobuf编译完成后再继续当前工程的编译。
 以上。
 
 
