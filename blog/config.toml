@@ -72,7 +72,9 @@ disableHugoGeneratorInject = false
 
     [languages.en.params.logo]
       logoText = "Gooooo！"
-      logoHomeLink = "https://min-zou.github.io/record.github.io"
+      logoHomeLink = "https://www.robot-rex.top"
+      # logoHomeLink = "https://min-zou.github.io/record.github.io"
+
     # or
     #
     # path = "/img/your-example-logo.svg"
@@ -80,19 +82,20 @@ disableHugoGeneratorInject = false
 
   # And you can even create generic menu
   [[menu.main]]
-    identifier = "blog"
-    name       = "Record"
+    identifier = "icon-list"
+    # name       = "Record"
+    weight = 20
     pre = "<i class='fa fa-road'></i>"
     url        = "/posts"
   [[menu.main]]
-    identifier = "about"
-    name       = "About"
+    identifier = "icon-about"
+    # name       = "about"
     url        = "/about"
   [[menu.main]]
-    identifier = "save"
-    name       = "Refrence"
+    identifier = "icon-ref"
+    # name       = "Refrence"
     url        = "/refs"
   [[menu.main]]
-    identifier = "extra"
-    name       = "Fun"
+    identifier = "icon-fun"
+    # name       = "Fun"
     url        = "/extra"

@@ -1,6 +1,8 @@
-find -type d -empty -exec rm -rf {} \;
 rm -rf public
-hugo --theme=hello-friend-ng --baseUrl="https://min-zou.github.io/record.github.io"
+
+find -type d -empty -exec rm -rf {} \;
+# hugo --theme=hello-friend-ng --baseUrl="https://min-zou.github.io/record.github.io"
+hugo --theme=hello-friend-ng --baseUrl="https://www.robot-rex.top"
 cd public
 git init
 git add .
