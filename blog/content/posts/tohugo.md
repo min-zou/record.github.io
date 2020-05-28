@@ -86,3 +86,5 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
   [[menu.main]]
     identifier = "icon-fun"
 ```
+#### 6. shortcode自定义 
+{{< bilibili BV18t41187Bx 3 >}}
