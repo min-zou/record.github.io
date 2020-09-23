@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hello World</title>
+    <link>https://min-zou.github.io/record.github.io/</link>
+    <description>Recent content on Hello World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 25 May 2020 10:49:39 +0800</lastBuildDate>
+    
+	<atom:link href="https://min-zou.github.io/record.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Camera</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2020/05/camera/</link>
+      <pubDate>Mon, 25 May 2020 10:49:39 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2020/05/camera/</guid>
+      <description>--   鱼眼相机模型 一、Mei相机模型 omni+radtan 标定参数为： $$x_1,k_1,k_2,p_1,p_2$$
+矫正： 1. 设置射影矫正的相机内参 opencv函数获取或按照推荐的内参矩阵进行设置 2. 通过设置的新相机内参得到相机坐标系下的三维坐标 $$x=\frac{u-c_x^{new}}{f_x^{new}}$$ $$y=\frac{v-c_y^{new}}{f_y^{new}}$$ 3. 投影到归一化平面 球半径 $$r=\sqrt{x^2+y^2+1}$$ 即可得坐标为 \begin{bmatrix} \frac{x}{r}&amp;amp;\frac{y}{r}&amp;amp;\frac{1}{r} \end{bmatrix} 4. 将上述点变换到另一坐标系下，与标定系数x相关 此时坐标为 \begin{bmatrix} \frac{x}{r}&amp;amp;\frac{y}{r}&amp;amp;\frac{1}{r}+x_i \end{bmatrix} 5. 投影至归一化平面 记上述坐标为 \begin{bmatrix} X_s&amp;amp;Y_s&amp;amp;Z_s+x_i \end{bmatrix} 归一化后可得 \begin{bmatrix} \frac{X_s}{Z_s+x_i}&amp;amp;\frac{Y_s}{Z_s+x_i}&amp;amp;1 \end{bmatrix} 记为 \begin{bmatrix} x_1&amp;amp;y_1&amp;amp;1 \end{bmatrix} 6. 添加畸变 $$x_d=x_1(1+k_1(x^2_1+y^2_1)+k_2{(x^2_1+y^2_1)}^2)+2p_1x_1y_1+ p_2({(x^2_1+y^2_1)+2x^2_1})$$ $$y_d=y_1(1+k_1(x^2_1+y^2_1)+k_2{(x^2_1+y^2_1)}^2)+2p_2x_1y_1+ p_1({(x^2_1+y^2_1)+2y^2_1})$$ 7. 通过内参系数进行投影 得到 \begin{bmatrix} f_xx_d+c_x&amp;amp;f_yy_d+c_y \end{bmatrix} 8. remap得到矫正图像
+二、atan相机模型 pinhole+fov 标定参数为 $$w$$ 1. 设置射影矫正的内参并投影至世界坐标系 $$x=\frac{u-c^{new}_x}{f^{new}_x}$$ $$y=\frac{v-c_y^{new}}{f_y^{new}}$$ 2. 计算相机图像平面投影半径 $$r=\sqrt{x_2+y_2}$$ $$r_d = \frac{1}{w}arctan(2rtan(\frac{w}{2}))$$ 3.</description>
+    </item>
+    
+    <item>
+      <title>Protobuf_use</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2020/05/protobuf_use/</link>
+      <pubDate>Tue, 12 May 2020 08:41:11 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2020/05/protobuf_use/</guid>
+      <description>proto生成头文件路径修改 多proto文件c++生成的过程中，头文件路径容易出错，同时cmake中给出的&amp;ndash;cpp-out生成c++文件的路径配置选项所生成的头文件和源文件是在同一目录，这造成如果不是相对路径的话就必须使用最上层有包名的路径或者同一文件夹下直接不包含路径。 当前使用的方法即是生成文件至同一文件夹下从而直接包含头文件。 CMake配置如下：
+file(GLOB_RECURSE ALL_PROTOS &amp;quot;include/proto/*.proto&amp;quot;) # TODO(cschuet): Move proto compilation to separate function. set(ALL_PROTO_SRCS) set(ALL_PROTO_HDRS) foreach(ABS_FIL ${ALL_PROTOS}) file(RELATIVE_PATH REL_FIL ${PROJECT_SOURCE_DIR} ${ABS_FIL}) # file(RELATIVE_PATH variable directory file) # RELATIVE_PAT推断出指定文件相对于特定目录的路径。 get_filename_component(DIR ${REL_FIL} DIRECTORY) get_filename_component(FIL_WE ${REL_FIL} NAME_WE) list(APPEND ALL_PROTO_SRCS &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&amp;quot;) list(APPEND ALL_PROTO_HDRS &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&amp;quot;) #实际头文件的路径 add_custom_command( OUTPUT &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&amp;quot; &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&amp;quot; COMMAND mkdir ARGS -p ${PROJECT_BINARY_DIR}/${DIR} #路径可能不存在，因此需要在proto生成前预先建立 COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} ARGS -I ${PROJECT_SOURCE_DIR}/${DIR} #源文件中对应头文件的路径为此路径与绝对路径的差值，此处设置可以使得头文件路径直接为文件名 #是设置检索proto文件的路径，与proto文件之间的调用也相关 --cpp_out ${PROJECT_BINARY_DIR}/${DIR} #源文件和头文件的输出路径 ${ABS_FIL} #绝对路径 DEPENDS ${ABS_FIL} COMMENT &amp;quot;Running C++ protocol buffer compiler on ${ABS_FIL} ,${REL_FIL} ,${DIR}&amp;quot; VERBATIM ) endforeach() set_source_files_properties(${ALL_PROTO_SRCS} ${ALL_PROTO_HDRS} PROPERTIES GENERATED TRUE)  另外的，若其他文件有依赖proto头文件的，需要在add_libraries中增加${ALL_PROTO_SRCS}依赖，即会在protobuf编译完成后再继续当前工程的编译。 以上。</description>
+    </item>
+    
+    <item>
+      <title>Tohugo</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2020/05/tohugo/</link>
+      <pubDate>Fri, 08 May 2020 14:34:25 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2020/05/tohugo/</guid>
+      <description>hugo折腾过程 记录博客从hexo迁移至hugo所遇到的问题 转向hugo也是因为hugo生成很快并且支持修改在线预览，同时也有hugo构建和使用很方便的原因。
+1. github page部署之后无法加载css和js 原因其实很简单，hugo编译静态站点时需要指定baseurl，本地预览时设置的localhost需要在生成静态页面时重新给定，即
+hugo --theme=hello-friend-ng --baseUrl=&amp;quot;https://xxx.github.io&amp;quot;  所使用的主题是hello-friend-ng，极简但还挺好看的。
+2. 页面menu点击后跳转错误 其实还是和baseurl相关，config.toml中设置的
+ [[menu.main]] identifier = &amp;quot;blog&amp;quot; name = &amp;quot;Record&amp;quot; pre = &amp;quot;&amp;lt;i class=&#39;fa fa-road&#39;&amp;gt;&amp;lt;/i&amp;gt;&amp;quot; url = &amp;quot;/posts&amp;quot;  其页面url是和baseurl不一致的，它会使用root路径，在使用github page部署时会出现问题，因此将canonifyURLs设置为false以寻找相对路径而不是直接绝对路径给定了。
+3.markdown中插入公式 在文件前加入
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;  即可使用latex编辑公式并显示。 例：
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$  可显示为： $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
+4.增加标签 参考A simple shortcode to add tags for Hugo.
+ 🎊 dUpdddate 🎉 Add 🔩 Changed 💣 Warning 👻 Deprecated  5.增加menu图标 参考Hugo、Hexo博客搭建及Hugo的自定义配置 阿里云下载图标后解压至本地，将eot、svg、ttf、woff等不同平台支持的格式复制放入static/fonts/iconfont下，在assets/scss文件夹下找到_fonts.</description>
+    </item>
+    
+    <item>
+      <title>Mark_uplook</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2020/05/mark_uplook/</link>
+      <pubDate>Fri, 08 May 2020 10:19:42 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2020/05/mark_uplook/</guid>
+      <description> 技术背景  现有技术的主要内容，如应用途径、主要结构和核心原理 现有技术的问题，及其出现的原因  在不考虑mark安装方式或者形式的情况下，当前mark一般作为相对定位手段，比如做目标点标识，辅助机器人进行定位，弥补单一传感器的缺陷，纠正误差等，同时也存在某些场景（送餐等）下顶部安装进行定位，但一般存在mark安装要求精度高，或只能辅助定位无法获得绝对位置。 因此也可用来进行相机标定
+要解决的问题  需要解决的现有技术中的对应问题  直接获取观测相机的位姿，则需要mark标记在空间中的绝对位置，同时由于mark安装不可测且存在不确定性，如何给出mark位姿是需要关注的一个重点。
+效果与优点 与现有技术对比所具有的优点， 1. 对mark标记安装精度没有要求，仅需要所附顶面为平面 2. 能够给出世界坐标系下的mark标记位姿 3. 顶部安装状态下可以生成可行区域栅格地图，方便后续导航使用
+具体实施方案  相机选择为红外相机，提高检出率， 遥控移动  </description>
+    </item>
+    
+    <item>
+      <title>Kinect_capture</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2018/10/kinect_capture/</link>
+      <pubDate>Fri, 26 Oct 2018 15:23:06 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2018/10/kinect_capture/</guid>
+      <description>&lt;p&gt;最近在跑离线ORBSLAM2，需要本地数据集。 手头靠谱点的相机暂时只有Kinect，还是一代。
+因此基本方法就是使用kinect去截取每帧图片，保存到本地。
+开源驱动libfreenect刚好提供了这一工具，驱动方式便选择libfreenect了。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Generate Blog with Hexo</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2018/10/generate-blog-with-hexo/</link>
+      <pubDate>Tue, 23 Oct 2018 20:40:11 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2018/10/generate-blog-with-hexo/</guid>
+      <description>从零开始在hexo+github+阿里云域名下搭建博客
+一、github page 设置 1、rep setting 新建github rep ， 命名为&amp;lt;你的项目名&amp;gt;.github.io
+2、ssh setting 进入用户设置setting，Personal settings下的SSH and GPG keys ，hit New SSH key
+获取当前pc的ssh key，获取方法见 粘贴获取到的key至github中
+3、connect setting 打开安装后的git(默认安装)，选择你的本地git仓库(在想放置仓库的位置新建文件夹‘git-test’)
+$ git clone https://github.com/your rep.git  在git bash或终端中添加用户名和邮箱，
+$ git config --global user.name &amp;quot;your name&amp;quot; $ git config --global user.email your email  4、git setting 在项目目录下进行一下操作即可提交代码：
+$ git add . $ git status #(查看修改的地方) $ git commit -m &amp;quot;your information about commit&amp;quot; # (必须添加说明) $ git push -u origin master （#first push with &#39;-u&#39;）  5、Domain Name setting 在阿里云注册域名，根据自己要求选择套餐</description>
+    </item>
+    
+  </channel>
+</rss>

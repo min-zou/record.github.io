@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Xiaox Liu]">
+<meta name="description" content="hugo折腾过程 记录博客从hexo迁移至hugo所遇到的问题 转向hugo也是因为hugo生成很快并且支持修改在线预览，同时也有hugo构建和使用很方便的原因。
+1. github page部署之后无法加载css和js 原因其实很简单，hugo编译静态站点时需要指定baseurl，本地预览时设置的localhost需要在生成静态页面时重新给定，即
+hugo --theme=hello-friend-ng --baseUrl=&amp;quot;https://xxx.github.io&amp;quot;  所使用的主题是hello-friend-ng，极简但还挺好看的。
+2. 页面menu点击后跳转错误 其实还是和baseurl相关，config.toml中设置的
+ [[menu.main]] identifier = &amp;quot;blog&amp;quot; name = &amp;quot;Record&amp;quot; pre = &amp;quot;&amp;lt;i class=&#39;fa fa-road&#39;&amp;gt;&amp;lt;/i&amp;gt;&amp;quot; url = &amp;quot;/posts&amp;quot;  其页面url是和baseurl不一致的，它会使用root路径，在使用github page部署时会出现问题，因此将canonifyURLs设置为false以寻找相对路径而不是直接绝对路径给定了。
+3.markdown中插入公式 在文件前加入
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;  即可使用latex编辑公式并显示。 例：
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$  可显示为： $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
+4.增加标签 参考A simple shortcode to add tags for Hugo.
+ 🎊 dUpdddate 🎉 Add 🔩 Changed 💣 Warning 👻 Deprecated  5.增加menu图标 参考Hugo、Hexo博客搭建及Hugo的自定义配置 阿里云下载图标后解压至本地，将eot、svg、ttf、woff等不同平台支持的格式复制放入static/fonts/iconfont下，在assets/scss文件夹下找到_fonts." />
+<meta name="keywords" content=", hugo" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://min-zou.github.io/record.github.io/posts/2020/05/tohugo/" />
+
+
+    <title>
+        
+            (ง •̀_•́)ง (*•̀ㅂ•́)و
+        
+    </title>
+    
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/record.github.io/main.min.a491087951ec826d27cbe2131c255882212761fa7c511f68e759f73419f1dc24.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/record.github.io/apple-touch-icon.png">
+
+    <link rel="manifest" href="/record.github.io/site.webmanifest">
+    <link rel="mask-icon" href="/record.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="icon" href="/record.github.io/dota.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Tohugo">
+<meta itemprop="description" content="hugo折腾过程 记录博客从hexo迁移至hugo所遇到的问题 转向hugo也是因为hugo生成很快并且支持修改在线预览，同时也有hugo构建和使用很方便的原因。
+1. github page部署之后无法加载css和js 原因其实很简单，hugo编译静态站点时需要指定baseurl，本地预览时设置的localhost需要在生成静态页面时重新给定，即
+hugo --theme=hello-friend-ng --baseUrl=&quot;https://xxx.github.io&quot;  所使用的主题是hello-friend-ng，极简但还挺好看的。
+2. 页面menu点击后跳转错误 其实还是和baseurl相关，config.toml中设置的
+ [[menu.main]] identifier = &quot;blog&quot; name = &quot;Record&quot; pre = &quot;&lt;i class=&#39;fa fa-road&#39;&gt;&lt;/i&gt;&quot; url = &quot;/posts&quot;  其页面url是和baseurl不一致的，它会使用root路径，在使用github page部署时会出现问题，因此将canonifyURLs设置为false以寻找相对路径而不是直接绝对路径给定了。
+3.markdown中插入公式 在文件前加入
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;  即可使用latex编辑公式并显示。 例：
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$  可显示为： $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
+4.增加标签 参考A simple shortcode to add tags for Hugo.
+ 🎊 dUpdddate 🎉 Add 🔩 Changed 💣 Warning 👻 Deprecated  5.增加menu图标 参考Hugo、Hexo博客搭建及Hugo的自定义配置 阿里云下载图标后解压至本地，将eot、svg、ttf、woff等不同平台支持的格式复制放入static/fonts/iconfont下，在assets/scss文件夹下找到_fonts.">
+
+
+<meta itemprop="datePublished" content="2020-05-08T14:34:25&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-08T14:34:25&#43;08:00" />
+<meta itemprop="wordCount" content="102">
+
+
+
+<meta itemprop="keywords" content="hugo," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://min-zou.github.io/record.github.io"/>
+
+<meta name="twitter:title" content="Tohugo"/>
+<meta name="twitter:description" content="hugo折腾过程 记录博客从hexo迁移至hugo所遇到的问题 转向hugo也是因为hugo生成很快并且支持修改在线预览，同时也有hugo构建和使用很方便的原因。
+1. github page部署之后无法加载css和js 原因其实很简单，hugo编译静态站点时需要指定baseurl，本地预览时设置的localhost需要在生成静态页面时重新给定，即
+hugo --theme=hello-friend-ng --baseUrl=&quot;https://xxx.github.io&quot;  所使用的主题是hello-friend-ng，极简但还挺好看的。
+2. 页面menu点击后跳转错误 其实还是和baseurl相关，config.toml中设置的
+ [[menu.main]] identifier = &quot;blog&quot; name = &quot;Record&quot; pre = &quot;&lt;i class=&#39;fa fa-road&#39;&gt;&lt;/i&gt;&quot; url = &quot;/posts&quot;  其页面url是和baseurl不一致的，它会使用root路径，在使用github page部署时会出现问题，因此将canonifyURLs设置为false以寻找相对路径而不是直接绝对路径给定了。
+3.markdown中插入公式 在文件前加入
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;  即可使用latex编辑公式并显示。 例：
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$  可显示为： $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
+4.增加标签 参考A simple shortcode to add tags for Hugo.
+ 🎊 dUpdddate 🎉 Add 🔩 Changed 💣 Warning 👻 Deprecated  5.增加menu图标 参考Hugo、Hexo博客搭建及Hugo的自定义配置 阿里云下载图标后解压至本地，将eot、svg、ttf、woff等不同平台支持的格式复制放入static/fonts/iconfont下，在assets/scss文件夹下找到_fonts."/>
+
+
+
+    <meta property="og:title" content="Tohugo" />
+<meta property="og:description" content="hugo折腾过程 记录博客从hexo迁移至hugo所遇到的问题 转向hugo也是因为hugo生成很快并且支持修改在线预览，同时也有hugo构建和使用很方便的原因。
+1. github page部署之后无法加载css和js 原因其实很简单，hugo编译静态站点时需要指定baseurl，本地预览时设置的localhost需要在生成静态页面时重新给定，即
+hugo --theme=hello-friend-ng --baseUrl=&quot;https://xxx.github.io&quot;  所使用的主题是hello-friend-ng，极简但还挺好看的。
+2. 页面menu点击后跳转错误 其实还是和baseurl相关，config.toml中设置的
+ [[menu.main]] identifier = &quot;blog&quot; name = &quot;Record&quot; pre = &quot;&lt;i class=&#39;fa fa-road&#39;&gt;&lt;/i&gt;&quot; url = &quot;/posts&quot;  其页面url是和baseurl不一致的，它会使用root路径，在使用github page部署时会出现问题，因此将canonifyURLs设置为false以寻找相对路径而不是直接绝对路径给定了。
+3.markdown中插入公式 在文件前加入
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;  即可使用latex编辑公式并显示。 例：
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$  可显示为： $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
+4.增加标签 参考A simple shortcode to add tags for Hugo.
+ 🎊 dUpdddate 🎉 Add 🔩 Changed 💣 Warning 👻 Deprecated  5.增加menu图标 参考Hugo、Hexo博客搭建及Hugo的自定义配置 阿里云下载图标后解压至本地，将eot、svg、ttf、woff等不同平台支持的格式复制放入static/fonts/iconfont下，在assets/scss文件夹下找到_fonts." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://min-zou.github.io/record.github.io/posts/2020/05/tohugo/" />
+<meta property="article:published_time" content="2020-05-08T14:34:25+08:00" />
+<meta property="article:modified_time" content="2020-05-08T14:34:25+08:00" /><meta property="og:site_name" content="Hello World" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-05-08 14:34:25 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://min-zou.github.io/record.github.io" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">none:~/blog$ </span>
+            <span class="logo__text">Gooooo！</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li>
+            	<a href="https://min-zou.github.io/record.github.io/posts"><i class="iconfont icon-list"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/about"><i class="iconfont icon-about"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/extra"><i class="iconfont icon-fun"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/refs"><i class="iconfont icon-ref"></i></a>
+            </li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>One minute
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://min-zou.github.io/record.github.io/posts/2020/05/tohugo/">Tohugo</a>
+            </h1>
+                <hr />
+                <aside id="toc">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#hugo折腾过程">hugo折腾过程</a>
+<ul>
+<li><a href="#记录博客从hexo迁移至hugo所遇到的问题">记录博客从hexo迁移至hugo所遇到的问题</a>
+<ul>
+<li><a href="#1-github-page部署之后无法加载css和js">1. github page部署之后无法加载css和js</a></li>
+<li><a href="#2-页面menu点击后跳转错误">2. 页面menu点击后跳转错误</a></li>
+<li><a href="#3-markdown中插入公式">3.markdown中插入公式</a></li>
+<li><a href="#4-增加标签">4.增加标签</a></li>
+<li><a href="#5-增加menu图标">5.增加menu图标</a></li>
+<li><a href="#6-shortcode自定义">6. shortcode自定义</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                </aside>
+                <hr />
+
+            
+
+            <div class="post-content">
+                
+
+<p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script></p>
+
+<h2 id="hugo折腾过程">hugo折腾过程</h2>
+
+<h3 id="记录博客从hexo迁移至hugo所遇到的问题">记录博客从hexo迁移至hugo所遇到的问题</h3>
+
+<p>转向hugo也是因为hugo生成很快并且支持修改在线预览，同时也有hugo构建和使用很方便的原因。</p>
+
+<h4 id="1-github-page部署之后无法加载css和js">1. github page部署之后无法加载css和js</h4>
+
+<p>原因其实很简单，hugo编译静态站点时需要指定baseurl，本地预览时设置的localhost需要在生成静态页面时重新给定，即</p>
+
+<pre><code>hugo --theme=hello-friend-ng --baseUrl=&quot;https://xxx.github.io&quot;
+</code></pre>
+
+<p>所使用的主题是<a href="https://github.com/rhazdon/hugo-theme-hello-friend-ng/" target="_blank">hello-friend-ng</a>，极简但还挺好看的。</p>
+
+<h4 id="2-页面menu点击后跳转错误">2. 页面menu点击后跳转错误</h4>
+
+<p>其实还是和baseurl相关，config.toml中设置的</p>
+
+<pre><code>  [[menu.main]]
+    identifier = &quot;blog&quot;
+    name       = &quot;Record&quot;
+    pre = &quot;&lt;i class='fa fa-road'&gt;&lt;/i&gt;&quot;
+    url        = &quot;/posts&quot;
+</code></pre>
+
+<p>其页面url是和baseurl不一致的，它会使用root路径，在使用github page部署时会出现问题，因此将<a href="https://gohugo.io/getting-started/configuration/#all-configuration-settings" target="_blank">canonifyURLs</a>设置为false以寻找相对路径而不是直接绝对路径给定了。</p>
+
+<h4 id="3-markdown中插入公式">3.markdown中插入公式</h4>
+
+<p>在文件前加入</p>
+
+<pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>即可使用latex编辑公式并显示。
+例：</p>
+
+<pre><code>$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
+</code></pre>
+
+<p>可显示为：
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$</p>
+
+<h4 id="4-增加标签">4.增加标签</h4>
+
+<p>参考<a href="https://github.com/kazukyakayashi/Hugo-Tag-Shortcode" target="_blank">A simple shortcode to add tags for Hugo.</a></p>
+
+<ul>
+<li><span class="label label-rounded text-light tag-update">🎊 dUpdddate</span></li>
+<li><span class="label label-rounded text-light tag-add">🎉 Add</span></li>
+<li><span class="label label-rounded text-light tag-changed">🔩 Changed</span></li>
+<li><span class="label label-rounded text-light tag-warning">💣 Warning</span></li>
+<li><span class="label label-rounded text-light tag-deprecated">👻 Deprecated</span></li>
+</ul>
+
+<h4 id="5-增加menu图标">5.增加menu图标</h4>
+
+<p>参考<a href="https://blog.csdn.net/qq_37908043/article/details/93350094" target="_blank">Hugo、Hexo博客搭建及Hugo的自定义配置</a>
+阿里云下载图标后解压至本地，将eot、svg、ttf、woff等不同平台支持的格式复制放入static/fonts/iconfont下，在assets/scss文件夹下找到_fonts.scss文件，在其中将下载的css文件中内容完整复制过来。</p>
+
+<p>同时文件路径src：url设置上述支持格式的路径并自定义名称，例：</p>
+
+<pre><code>@font-face {
+  font-family: &quot;iconfont&quot;;
+  src: url('../fonts/iconfont/iconfont.eot?t=1590470537939'); /* IE9 */
+  ...
+}
+.icon-fun:before {
+  content: &quot;\e633&quot;;
+}
+</code></pre>
+
+<p>在layouts/partials下修改menu.html:</p>
+
+<pre><code>  &lt;li&gt;
+  &lt;a href=&quot;{{ .URL | absLangURL }}&quot;&gt;&lt;i class=&quot;iconfont {{ .Identifier }}&quot;&gt;&lt;/i&gt;{{ .Name }}&lt;/a&gt;
+  &lt;/li&gt;
+</code></pre>
+
+<p>完成之后在config.toml中设置identifier，例：</p>
+
+<pre><code>  [[menu.main]]
+    identifier = &quot;icon-fun&quot;
+</code></pre>
+
+<h4 id="6-shortcode自定义">6. shortcode自定义</h4>
+
+<iframe src="//player.bilibili.com/player.html?bvid=BV18t41187Bx&page=3"
+    scrolling="no" height="400" width="600" frameborder="no" framespacing="0" allowfullscreen="false">
+</iframe>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://min-zou.github.io/record.github.io/tags/hugo">hugo</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>102 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-05-08 14:34 &#43;0800</p>
+        </div>
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://min-zou.github.io/record.github.io">Echo Rex</a></span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span> <a href="https://min-zou.github.io/record.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/record.github.io/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+
+
+
+    </body>
+</html>
