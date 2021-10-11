@@ -115,7 +115,7 @@ disableHugoGeneratorInject = false
   [[menu.main]]
     identifier = "icon-about"
     # name       = "about"
-    url        = "/about"
+    url        = "/about_me"
   [[menu.main]]
     identifier = "icon-ref"
     # name       = "Refrence"
