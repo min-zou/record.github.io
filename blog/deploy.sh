@@ -10,3 +10,4 @@ git add .
 git config --local user.email "xxiao_l@163.com"
 git commit -m "build site"
 git push -f git@github.com:min-zou/record.github.io.git master
+rm -rf .git
