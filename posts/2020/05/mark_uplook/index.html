@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Xiaox Liu]">
+<meta name="description" content="技术背景  现有技术的主要内容，如应用途径、主要结构和核心原理 现有技术的问题，及其出现的原因  在不考虑mark安装方式或者形式的情况下，当前mark一般作为相对定位手段，比如做目标点标识，辅助机器人进行定位，弥补单一传感器的缺陷，纠正误差等，同时也存在某些场景（送餐等）下顶部安装进行定位，但一般存在mark安装要求精度高，或只能辅助定位无法获得绝对位置。 因此也可用来进行相机标定
+要解决的问题  需要解决的现有技术中的对应问题  直接获取观测相机的位姿，则需要mark标记在空间中的绝对位置，同时由于mark安装不可测且存在不确定性，如何给出mark位姿是需要关注的一个重点。
+效果与优点 与现有技术对比所具有的优点，
+ 对mark标记安装精度没有要求，仅需要所附顶面为平面 能够给出世界坐标系下的mark标记位姿 顶部安装状态下可以生成可行区域栅格地图，方便后续导航使用  具体实施方案  相机选择为红外相机，提高检出率， 遥控移动  " />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://min-zou.github.io/record.github.io/posts/2020/05/mark_uplook/" />
+
+
+    <title>
+        
+            (ง •̀_•́)ง (*•̀ㅂ•́)و
+        
+    </title>
+    
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/record.github.io/main.min.4238ea17e5627781c9711b24e3c86501761ccf6768401484242baef6276f5250.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/record.github.io/apple-touch-icon.png">
+
+    <link rel="manifest" href="/record.github.io/site.webmanifest">
+    <link rel="mask-icon" href="/record.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="icon" href="/record.github.io/dota.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Mark_uplook">
+<meta itemprop="description" content="技术背景  现有技术的主要内容，如应用途径、主要结构和核心原理 现有技术的问题，及其出现的原因  在不考虑mark安装方式或者形式的情况下，当前mark一般作为相对定位手段，比如做目标点标识，辅助机器人进行定位，弥补单一传感器的缺陷，纠正误差等，同时也存在某些场景（送餐等）下顶部安装进行定位，但一般存在mark安装要求精度高，或只能辅助定位无法获得绝对位置。 因此也可用来进行相机标定
+要解决的问题  需要解决的现有技术中的对应问题  直接获取观测相机的位姿，则需要mark标记在空间中的绝对位置，同时由于mark安装不可测且存在不确定性，如何给出mark位姿是需要关注的一个重点。
+效果与优点 与现有技术对比所具有的优点，
+ 对mark标记安装精度没有要求，仅需要所附顶面为平面 能够给出世界坐标系下的mark标记位姿 顶部安装状态下可以生成可行区域栅格地图，方便后续导航使用  具体实施方案  相机选择为红外相机，提高检出率， 遥控移动  ">
+<meta itemprop="datePublished" content="2020-05-08T10:19:42+08:00" />
+<meta itemprop="dateModified" content="2020-05-08T10:19:42+08:00" />
+<meta itemprop="wordCount" content="16">
+<meta itemprop="image" content="https://min-zou.github.io/record.github.io"/>
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://min-zou.github.io/record.github.io"/>
+
+<meta name="twitter:title" content="Mark_uplook"/>
+<meta name="twitter:description" content="技术背景  现有技术的主要内容，如应用途径、主要结构和核心原理 现有技术的问题，及其出现的原因  在不考虑mark安装方式或者形式的情况下，当前mark一般作为相对定位手段，比如做目标点标识，辅助机器人进行定位，弥补单一传感器的缺陷，纠正误差等，同时也存在某些场景（送餐等）下顶部安装进行定位，但一般存在mark安装要求精度高，或只能辅助定位无法获得绝对位置。 因此也可用来进行相机标定
+要解决的问题  需要解决的现有技术中的对应问题  直接获取观测相机的位姿，则需要mark标记在空间中的绝对位置，同时由于mark安装不可测且存在不确定性，如何给出mark位姿是需要关注的一个重点。
+效果与优点 与现有技术对比所具有的优点，
+ 对mark标记安装精度没有要求，仅需要所附顶面为平面 能够给出世界坐标系下的mark标记位姿 顶部安装状态下可以生成可行区域栅格地图，方便后续导航使用  具体实施方案  相机选择为红外相机，提高检出率， 遥控移动  "/>
+
+
+
+    <meta property="og:title" content="Mark_uplook" />
+<meta property="og:description" content="技术背景  现有技术的主要内容，如应用途径、主要结构和核心原理 现有技术的问题，及其出现的原因  在不考虑mark安装方式或者形式的情况下，当前mark一般作为相对定位手段，比如做目标点标识，辅助机器人进行定位，弥补单一传感器的缺陷，纠正误差等，同时也存在某些场景（送餐等）下顶部安装进行定位，但一般存在mark安装要求精度高，或只能辅助定位无法获得绝对位置。 因此也可用来进行相机标定
+要解决的问题  需要解决的现有技术中的对应问题  直接获取观测相机的位姿，则需要mark标记在空间中的绝对位置，同时由于mark安装不可测且存在不确定性，如何给出mark位姿是需要关注的一个重点。
+效果与优点 与现有技术对比所具有的优点，
+ 对mark标记安装精度没有要求，仅需要所附顶面为平面 能够给出世界坐标系下的mark标记位姿 顶部安装状态下可以生成可行区域栅格地图，方便后续导航使用  具体实施方案  相机选择为红外相机，提高检出率， 遥控移动  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://min-zou.github.io/record.github.io/posts/2020/05/mark_uplook/" />
+<meta property="og:image" content="https://min-zou.github.io/record.github.io"/>
+<meta property="article:published_time" content="2020-05-08T10:19:42+08:00" />
+<meta property="article:modified_time" content="2020-05-08T10:19:42+08:00" /><meta property="og:site_name" content="Hello World" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-05-08 10:19:42 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://min-zou.github.io/record.github.io" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">none:~/blog$ </span>
+            <span class="logo__text">Gooooo！</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li>
+            	<a href="https://min-zou.github.io/record.github.io/posts"><i class="iconfont icon-list"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/about_me"><i class="iconfont icon-about"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/extra"><i class="iconfont icon-fun"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/refs"><i class="iconfont icon-ref"></i></a>
+            </li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>One minute
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://min-zou.github.io/record.github.io/posts/2020/05/mark_uplook/">Mark_uplook</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <h1 id="技术背景">技术背景</h1>
+<ol>
+<li>现有技术的主要内容，如应用途径、主要结构和核心原理</li>
+<li>现有技术的问题，及其出现的原因</li>
+</ol>
+<p>在不考虑mark安装方式或者形式的情况下，当前mark一般作为相对定位手段，比如做目标点标识，辅助机器人进行定位，弥补单一传感器的缺陷，纠正误差等，同时也存在某些场景（送餐等）下顶部安装进行定位，但一般存在mark安装要求精度高，或只能辅助定位无法获得绝对位置。
+因此也可用来进行相机标定</p>
+<h1 id="要解决的问题">要解决的问题</h1>
+<ol>
+<li>需要解决的现有技术中的对应问题</li>
+</ol>
+<p>直接获取观测相机的位姿，则需要mark标记在空间中的绝对位置，同时由于mark安装不可测且存在不确定性，如何给出mark位姿是需要关注的一个重点。</p>
+<h1 id="效果与优点">效果与优点</h1>
+<p>与现有技术对比所具有的优点，</p>
+<ol>
+<li>对mark标记安装精度没有要求，仅需要所附顶面为平面</li>
+<li>能够给出世界坐标系下的mark标记位姿</li>
+<li>顶部安装状态下可以生成可行区域栅格地图，方便后续导航使用</li>
+</ol>
+<h1 id="具体实施方案">具体实施方案</h1>
+<ol>
+<li>相机选择为红外相机，提高检出率，</li>
+<li>遥控移动</li>
+</ol>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>16 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-05-08 10:19 &#43;0800</p>
+        </div>
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://min-zou.github.io/record.github.io">Echo Rex</a></span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span> <a href="https://min-zou.github.io/record.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/record.github.io/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+
+
+
+    </body>
+</html>

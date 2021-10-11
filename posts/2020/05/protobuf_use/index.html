@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Xiaox Liu]">
+<meta name="description" content="proto生成头文件路径修改 多proto文件c&#43;&#43;生成的过程中，头文件路径容易出错，同时cmake中给出的&amp;ndash;cpp-out生成c&#43;&#43;文件的路径配置选项所生成的头文件和源文件是在同一目录，这造成如果不是相对路径的话就必须使用最上层有包名的路径或者同一文件夹下直接不包含路径。 当前使用的方法即是生成文件至同一文件夹下从而直接包含头文件。 CMake配置如下：
+file(GLOB_RECURSE ALL_PROTOS &amp;quot;include/proto/*.proto&amp;quot;) # TODO(cschuet): Move proto compilation to separate function. set(ALL_PROTO_SRCS) set(ALL_PROTO_HDRS) foreach(ABS_FIL ${ALL_PROTOS}) file(RELATIVE_PATH REL_FIL ${PROJECT_SOURCE_DIR} ${ABS_FIL}) # file(RELATIVE_PATH variable directory file) # RELATIVE_PAT推断出指定文件相对于特定目录的路径。 get_filename_component(DIR ${REL_FIL} DIRECTORY) get_filename_component(FIL_WE ${REL_FIL} NAME_WE) list(APPEND ALL_PROTO_SRCS &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&amp;quot;) list(APPEND ALL_PROTO_HDRS &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&amp;quot;) #实际头文件的路径 add_custom_command( OUTPUT &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&amp;quot; &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&amp;quot; COMMAND mkdir ARGS -p ${PROJECT_BINARY_DIR}/${DIR} #路径可能不存在，因此需要在proto生成前预先建立 COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} ARGS -I ${PROJECT_SOURCE_DIR}/${DIR} #源文件中对应头文件的路径为此路径与绝对路径的差值，此处设置可以使得头文件路径直接为文件名 #是设置检索proto文件的路径，与proto文件之间的调用也相关 --cpp_out ${PROJECT_BINARY_DIR}/${DIR} #源文件和头文件的输出路径 ${ABS_FIL} #绝对路径 DEPENDS ${ABS_FIL} COMMENT &amp;quot;Running C&#43;&#43; protocol buffer compiler on ${ABS_FIL} ,${REL_FIL} ,${DIR}&amp;quot; VERBATIM ) endforeach() set_source_files_properties(${ALL_PROTO_SRCS} ${ALL_PROTO_HDRS} PROPERTIES GENERATED TRUE) 另外的，若其他文件有依赖proto头文件的，需要在add_libraries中增加${ALL_PROTO_SRCS}依赖，即会在protobuf编译完成后再继续当前工程的编译。 以上。" />
+<meta name="keywords" content=", protobuf, data serial" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://min-zou.github.io/record.github.io/posts/2020/05/protobuf_use/" />
+
+
+    <title>
+        
+            (ง •̀_•́)ง (*•̀ㅂ•́)و
+        
+    </title>
+    
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/record.github.io/main.min.4238ea17e5627781c9711b24e3c86501761ccf6768401484242baef6276f5250.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/record.github.io/apple-touch-icon.png">
+
+    <link rel="manifest" href="/record.github.io/site.webmanifest">
+    <link rel="mask-icon" href="/record.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="icon" href="/record.github.io/dota.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Protobuf_use">
+<meta itemprop="description" content="proto生成头文件路径修改 多proto文件c&#43;&#43;生成的过程中，头文件路径容易出错，同时cmake中给出的&ndash;cpp-out生成c&#43;&#43;文件的路径配置选项所生成的头文件和源文件是在同一目录，这造成如果不是相对路径的话就必须使用最上层有包名的路径或者同一文件夹下直接不包含路径。 当前使用的方法即是生成文件至同一文件夹下从而直接包含头文件。 CMake配置如下：
+file(GLOB_RECURSE ALL_PROTOS &quot;include/proto/*.proto&quot;) # TODO(cschuet): Move proto compilation to separate function. set(ALL_PROTO_SRCS) set(ALL_PROTO_HDRS) foreach(ABS_FIL ${ALL_PROTOS}) file(RELATIVE_PATH REL_FIL ${PROJECT_SOURCE_DIR} ${ABS_FIL}) # file(RELATIVE_PATH variable directory file) # RELATIVE_PAT推断出指定文件相对于特定目录的路径。 get_filename_component(DIR ${REL_FIL} DIRECTORY) get_filename_component(FIL_WE ${REL_FIL} NAME_WE) list(APPEND ALL_PROTO_SRCS &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&quot;) list(APPEND ALL_PROTO_HDRS &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&quot;) #实际头文件的路径 add_custom_command( OUTPUT &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&quot; &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&quot; COMMAND mkdir ARGS -p ${PROJECT_BINARY_DIR}/${DIR} #路径可能不存在，因此需要在proto生成前预先建立 COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} ARGS -I ${PROJECT_SOURCE_DIR}/${DIR} #源文件中对应头文件的路径为此路径与绝对路径的差值，此处设置可以使得头文件路径直接为文件名 #是设置检索proto文件的路径，与proto文件之间的调用也相关 --cpp_out ${PROJECT_BINARY_DIR}/${DIR} #源文件和头文件的输出路径 ${ABS_FIL} #绝对路径 DEPENDS ${ABS_FIL} COMMENT &quot;Running C&#43;&#43; protocol buffer compiler on ${ABS_FIL} ,${REL_FIL} ,${DIR}&quot; VERBATIM ) endforeach() set_source_files_properties(${ALL_PROTO_SRCS} ${ALL_PROTO_HDRS} PROPERTIES GENERATED TRUE) 另外的，若其他文件有依赖proto头文件的，需要在add_libraries中增加${ALL_PROTO_SRCS}依赖，即会在protobuf编译完成后再继续当前工程的编译。 以上。">
+<meta itemprop="datePublished" content="2020-05-12T08:41:11+08:00" />
+<meta itemprop="dateModified" content="2020-05-12T08:41:11+08:00" />
+<meta itemprop="wordCount" content="87">
+<meta itemprop="image" content="https://min-zou.github.io/record.github.io"/>
+
+
+
+<meta itemprop="keywords" content="protobuf,data serial," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://min-zou.github.io/record.github.io"/>
+
+<meta name="twitter:title" content="Protobuf_use"/>
+<meta name="twitter:description" content="proto生成头文件路径修改 多proto文件c&#43;&#43;生成的过程中，头文件路径容易出错，同时cmake中给出的&ndash;cpp-out生成c&#43;&#43;文件的路径配置选项所生成的头文件和源文件是在同一目录，这造成如果不是相对路径的话就必须使用最上层有包名的路径或者同一文件夹下直接不包含路径。 当前使用的方法即是生成文件至同一文件夹下从而直接包含头文件。 CMake配置如下：
+file(GLOB_RECURSE ALL_PROTOS &quot;include/proto/*.proto&quot;) # TODO(cschuet): Move proto compilation to separate function. set(ALL_PROTO_SRCS) set(ALL_PROTO_HDRS) foreach(ABS_FIL ${ALL_PROTOS}) file(RELATIVE_PATH REL_FIL ${PROJECT_SOURCE_DIR} ${ABS_FIL}) # file(RELATIVE_PATH variable directory file) # RELATIVE_PAT推断出指定文件相对于特定目录的路径。 get_filename_component(DIR ${REL_FIL} DIRECTORY) get_filename_component(FIL_WE ${REL_FIL} NAME_WE) list(APPEND ALL_PROTO_SRCS &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&quot;) list(APPEND ALL_PROTO_HDRS &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&quot;) #实际头文件的路径 add_custom_command( OUTPUT &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&quot; &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&quot; COMMAND mkdir ARGS -p ${PROJECT_BINARY_DIR}/${DIR} #路径可能不存在，因此需要在proto生成前预先建立 COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} ARGS -I ${PROJECT_SOURCE_DIR}/${DIR} #源文件中对应头文件的路径为此路径与绝对路径的差值，此处设置可以使得头文件路径直接为文件名 #是设置检索proto文件的路径，与proto文件之间的调用也相关 --cpp_out ${PROJECT_BINARY_DIR}/${DIR} #源文件和头文件的输出路径 ${ABS_FIL} #绝对路径 DEPENDS ${ABS_FIL} COMMENT &quot;Running C&#43;&#43; protocol buffer compiler on ${ABS_FIL} ,${REL_FIL} ,${DIR}&quot; VERBATIM ) endforeach() set_source_files_properties(${ALL_PROTO_SRCS} ${ALL_PROTO_HDRS} PROPERTIES GENERATED TRUE) 另外的，若其他文件有依赖proto头文件的，需要在add_libraries中增加${ALL_PROTO_SRCS}依赖，即会在protobuf编译完成后再继续当前工程的编译。 以上。"/>
+
+
+
+    <meta property="og:title" content="Protobuf_use" />
+<meta property="og:description" content="proto生成头文件路径修改 多proto文件c&#43;&#43;生成的过程中，头文件路径容易出错，同时cmake中给出的&ndash;cpp-out生成c&#43;&#43;文件的路径配置选项所生成的头文件和源文件是在同一目录，这造成如果不是相对路径的话就必须使用最上层有包名的路径或者同一文件夹下直接不包含路径。 当前使用的方法即是生成文件至同一文件夹下从而直接包含头文件。 CMake配置如下：
+file(GLOB_RECURSE ALL_PROTOS &quot;include/proto/*.proto&quot;) # TODO(cschuet): Move proto compilation to separate function. set(ALL_PROTO_SRCS) set(ALL_PROTO_HDRS) foreach(ABS_FIL ${ALL_PROTOS}) file(RELATIVE_PATH REL_FIL ${PROJECT_SOURCE_DIR} ${ABS_FIL}) # file(RELATIVE_PATH variable directory file) # RELATIVE_PAT推断出指定文件相对于特定目录的路径。 get_filename_component(DIR ${REL_FIL} DIRECTORY) get_filename_component(FIL_WE ${REL_FIL} NAME_WE) list(APPEND ALL_PROTO_SRCS &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&quot;) list(APPEND ALL_PROTO_HDRS &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&quot;) #实际头文件的路径 add_custom_command( OUTPUT &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&quot; &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&quot; COMMAND mkdir ARGS -p ${PROJECT_BINARY_DIR}/${DIR} #路径可能不存在，因此需要在proto生成前预先建立 COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} ARGS -I ${PROJECT_SOURCE_DIR}/${DIR} #源文件中对应头文件的路径为此路径与绝对路径的差值，此处设置可以使得头文件路径直接为文件名 #是设置检索proto文件的路径，与proto文件之间的调用也相关 --cpp_out ${PROJECT_BINARY_DIR}/${DIR} #源文件和头文件的输出路径 ${ABS_FIL} #绝对路径 DEPENDS ${ABS_FIL} COMMENT &quot;Running C&#43;&#43; protocol buffer compiler on ${ABS_FIL} ,${REL_FIL} ,${DIR}&quot; VERBATIM ) endforeach() set_source_files_properties(${ALL_PROTO_SRCS} ${ALL_PROTO_HDRS} PROPERTIES GENERATED TRUE) 另外的，若其他文件有依赖proto头文件的，需要在add_libraries中增加${ALL_PROTO_SRCS}依赖，即会在protobuf编译完成后再继续当前工程的编译。 以上。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://min-zou.github.io/record.github.io/posts/2020/05/protobuf_use/" />
+<meta property="og:image" content="https://min-zou.github.io/record.github.io"/>
+<meta property="article:published_time" content="2020-05-12T08:41:11+08:00" />
+<meta property="article:modified_time" content="2020-05-12T08:41:11+08:00" /><meta property="og:site_name" content="Hello World" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-05-12 08:41:11 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://min-zou.github.io/record.github.io" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">none:~/blog$ </span>
+            <span class="logo__text">Gooooo！</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li>
+            	<a href="https://min-zou.github.io/record.github.io/posts"><i class="iconfont icon-list"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/about_me"><i class="iconfont icon-about"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/extra"><i class="iconfont icon-fun"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/refs"><i class="iconfont icon-ref"></i></a>
+            </li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>One minute
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://min-zou.github.io/record.github.io/posts/2020/05/protobuf_use/">Protobuf_use</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <h3 id="proto生成头文件路径修改">proto生成头文件路径修改</h3>
+<p>多proto文件c++生成的过程中，头文件路径容易出错，同时cmake中给出的&ndash;cpp-out生成c++文件的路径配置选项所生成的头文件和源文件是在同一目录，这造成如果不是相对路径的话就必须使用最上层有包名的路径或者同一文件夹下直接不包含路径。
+当前使用的方法即是生成文件至同一文件夹下从而直接包含头文件。
+CMake配置如下：</p>
+<pre><code>file(GLOB_RECURSE ALL_PROTOS &quot;include/proto/*.proto&quot;)
+# TODO(cschuet): Move proto compilation to separate function.
+set(ALL_PROTO_SRCS)
+set(ALL_PROTO_HDRS)
+foreach(ABS_FIL ${ALL_PROTOS})
+  file(RELATIVE_PATH REL_FIL ${PROJECT_SOURCE_DIR} ${ABS_FIL})
+  # file(RELATIVE_PATH variable directory file)
+  # RELATIVE_PAT推断出指定文件相对于特定目录的路径。
+  get_filename_component(DIR ${REL_FIL} DIRECTORY)
+  get_filename_component(FIL_WE ${REL_FIL} NAME_WE)
+
+  list(APPEND ALL_PROTO_SRCS &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&quot;)
+  list(APPEND ALL_PROTO_HDRS &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&quot;)
+  #实际头文件的路径
+
+  add_custom_command(
+    OUTPUT &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&quot;
+           &quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&quot;
+    COMMAND  mkdir ARGS -p ${PROJECT_BINARY_DIR}/${DIR}
+    #路径可能不存在，因此需要在proto生成前预先建立
+
+    COMMAND  ${PROTOBUF_PROTOC_EXECUTABLE}
+    ARGS 
+    -I  ${PROJECT_SOURCE_DIR}/${DIR} #源文件中对应头文件的路径为此路径与绝对路径的差值，此处设置可以使得头文件路径直接为文件名    #是设置检索proto文件的路径，与proto文件之间的调用也相关
+    --cpp_out  ${PROJECT_BINARY_DIR}/${DIR} #源文件和头文件的输出路径
+    ${ABS_FIL} #绝对路径
+    DEPENDS ${ABS_FIL}
+    COMMENT &quot;Running C++ protocol buffer compiler on ${ABS_FIL} ,${REL_FIL}  ,${DIR}&quot;
+    VERBATIM
+  )
+endforeach()
+set_source_files_properties(${ALL_PROTO_SRCS} ${ALL_PROTO_HDRS} PROPERTIES GENERATED TRUE)
+</code></pre><p>另外的，若其他文件有依赖proto头文件的，需要在add_libraries中增加${ALL_PROTO_SRCS}依赖，即会在protobuf编译完成后再继续当前工程的编译。
+以上。</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://min-zou.github.io/record.github.io/tags/protobuf">protobuf</a></span><span class="tag"><a href="https://min-zou.github.io/record.github.io/tags/data-serial">data serial</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>87 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-05-12 08:41 &#43;0800</p>
+        </div>
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://min-zou.github.io/record.github.io">Echo Rex</a></span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span> <a href="https://min-zou.github.io/record.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/record.github.io/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+
+
+
+    </body>
+</html>

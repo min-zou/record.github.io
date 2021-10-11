@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data serial on Hello World</title>
+    <link>https://min-zou.github.io/record.github.io/tags/data-serial/</link>
+    <description>Recent content in data serial on Hello World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 May 2020 08:41:11 +0800</lastBuildDate><atom:link href="https://min-zou.github.io/record.github.io/tags/data-serial/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Protobuf_use</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2020/05/protobuf_use/</link>
+      <pubDate>Tue, 12 May 2020 08:41:11 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2020/05/protobuf_use/</guid>
+      <description>proto生成头文件路径修改 多proto文件c++生成的过程中，头文件路径容易出错，同时cmake中给出的&amp;ndash;cpp-out生成c++文件的路径配置选项所生成的头文件和源文件是在同一目录，这造成如果不是相对路径的话就必须使用最上层有包名的路径或者同一文件夹下直接不包含路径。 当前使用的方法即是生成文件至同一文件夹下从而直接包含头文件。 CMake配置如下：
+file(GLOB_RECURSE ALL_PROTOS &amp;quot;include/proto/*.proto&amp;quot;) # TODO(cschuet): Move proto compilation to separate function. set(ALL_PROTO_SRCS) set(ALL_PROTO_HDRS) foreach(ABS_FIL ${ALL_PROTOS}) file(RELATIVE_PATH REL_FIL ${PROJECT_SOURCE_DIR} ${ABS_FIL}) # file(RELATIVE_PATH variable directory file) # RELATIVE_PAT推断出指定文件相对于特定目录的路径。 get_filename_component(DIR ${REL_FIL} DIRECTORY) get_filename_component(FIL_WE ${REL_FIL} NAME_WE) list(APPEND ALL_PROTO_SRCS &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&amp;quot;) list(APPEND ALL_PROTO_HDRS &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&amp;quot;) #实际头文件的路径 add_custom_command( OUTPUT &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.cc&amp;quot; &amp;quot;${PROJECT_BINARY_DIR}/${DIR}/${FIL_WE}.pb.h&amp;quot; COMMAND mkdir ARGS -p ${PROJECT_BINARY_DIR}/${DIR} #路径可能不存在，因此需要在proto生成前预先建立 COMMAND ${PROTOBUF_PROTOC_EXECUTABLE} ARGS -I ${PROJECT_SOURCE_DIR}/${DIR} #源文件中对应头文件的路径为此路径与绝对路径的差值，此处设置可以使得头文件路径直接为文件名 #是设置检索proto文件的路径，与proto文件之间的调用也相关 --cpp_out ${PROJECT_BINARY_DIR}/${DIR} #源文件和头文件的输出路径 ${ABS_FIL} #绝对路径 DEPENDS ${ABS_FIL} COMMENT &amp;quot;Running C++ protocol buffer compiler on ${ABS_FIL} ,${REL_FIL} ,${DIR}&amp;quot; VERBATIM ) endforeach() set_source_files_properties(${ALL_PROTO_SRCS} ${ALL_PROTO_HDRS} PROPERTIES GENERATED TRUE) 另外的，若其他文件有依赖proto头文件的，需要在add_libraries中增加${ALL_PROTO_SRCS}依赖，即会在protobuf编译完成后再继续当前工程的编译。 以上。</description>
+    </item>
+    
+  </channel>
+</rss>

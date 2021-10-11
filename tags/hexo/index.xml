@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hexo on Hello World</title>
+    <link>https://min-zou.github.io/record.github.io/tags/hexo/</link>
+    <description>Recent content in hexo on Hello World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 23 Oct 2018 20:40:11 +0800</lastBuildDate><atom:link href="https://min-zou.github.io/record.github.io/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Generate Blog with Hexo</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2018/10/generate-blog-with-hexo/</link>
+      <pubDate>Tue, 23 Oct 2018 20:40:11 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2018/10/generate-blog-with-hexo/</guid>
+      <description>从零开始在hexo+github+阿里云域名下搭建博客
+一、github page 设置 1、rep setting 新建github rep ， 命名为&amp;lt;你的项目名&amp;gt;.github.io
+2、ssh setting 进入用户设置setting，Personal settings下的SSH and GPG keys ，hit New SSH key
+获取当前pc的ssh key，获取方法见 粘贴获取到的key至github中
+3、connect setting 打开安装后的git(默认安装)，选择你的本地git仓库(在想放置仓库的位置新建文件夹‘git-test’)
+$ git clone https://github.com/your rep.git 在git bash或终端中添加用户名和邮箱，
+$ git config --global user.name &amp;#34;your name&amp;#34; $ git config --global user.email your email 4、git setting 在项目目录下进行一下操作即可提交代码：
+$ git add . $ git status #(查看修改的地方) $ git commit -m &amp;#34;your information about commit&amp;#34; # (必须添加说明) $ git push -u origin master （#first push with &amp;#39;-u&amp;#39;） 5、Domain Name setting 在阿里云注册域名，根据自己要求选择套餐</description>
+    </item>
+    
+  </channel>
+</rss>

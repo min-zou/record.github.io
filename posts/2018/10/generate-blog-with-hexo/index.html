@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="map[name:Xiaox Liu]">
+<meta name="description" content="从零开始在hexo&#43;github&#43;阿里云域名下搭建博客
+一、github page 设置 1、rep setting 新建github rep ， 命名为&amp;lt;你的项目名&amp;gt;.github.io
+2、ssh setting 进入用户设置setting，Personal settings下的SSH and GPG keys ，hit New SSH key
+获取当前pc的ssh key，获取方法见 粘贴获取到的key至github中
+3、connect setting 打开安装后的git(默认安装)，选择你的本地git仓库(在想放置仓库的位置新建文件夹‘git-test’)
+$ git clone https://github.com/your rep.git 在git bash或终端中添加用户名和邮箱，
+$ git config --global user.name &amp;#34;your name&amp;#34; $ git config --global user.email your email 4、git setting 在项目目录下进行一下操作即可提交代码：
+$ git add . $ git status #(查看修改的地方) $ git commit -m &amp;#34;your information about commit&amp;#34; # (必须添加说明) $ git push -u origin master （#first push with &amp;#39;-u&amp;#39;） 5、Domain Name setting 在阿里云注册域名，根据自己要求选择套餐" />
+<meta name="keywords" content=", hexo" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://min-zou.github.io/record.github.io/posts/2018/10/generate-blog-with-hexo/" />
+
+
+    <title>
+        
+            (ง •̀_•́)ง (*•̀ㅂ•́)و
+        
+    </title>
+    
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/record.github.io/main.min.4238ea17e5627781c9711b24e3c86501761ccf6768401484242baef6276f5250.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/record.github.io/apple-touch-icon.png">
+
+    <link rel="manifest" href="/record.github.io/site.webmanifest">
+    <link rel="mask-icon" href="/record.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="icon" href="/record.github.io/dota.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Generate Blog with Hexo">
+<meta itemprop="description" content="从零开始在hexo&#43;github&#43;阿里云域名下搭建博客
+一、github page 设置 1、rep setting 新建github rep ， 命名为&lt;你的项目名&gt;.github.io
+2、ssh setting 进入用户设置setting，Personal settings下的SSH and GPG keys ，hit New SSH key
+获取当前pc的ssh key，获取方法见 粘贴获取到的key至github中
+3、connect setting 打开安装后的git(默认安装)，选择你的本地git仓库(在想放置仓库的位置新建文件夹‘git-test’)
+$ git clone https://github.com/your rep.git 在git bash或终端中添加用户名和邮箱，
+$ git config --global user.name &#34;your name&#34; $ git config --global user.email your email 4、git setting 在项目目录下进行一下操作即可提交代码：
+$ git add . $ git status #(查看修改的地方) $ git commit -m &#34;your information about commit&#34; # (必须添加说明) $ git push -u origin master （#first push with &#39;-u&#39;） 5、Domain Name setting 在阿里云注册域名，根据自己要求选择套餐">
+<meta itemprop="datePublished" content="2018-10-23T20:40:11+08:00" />
+<meta itemprop="dateModified" content="2018-10-23T20:40:11+08:00" />
+<meta itemprop="wordCount" content="171">
+<meta itemprop="image" content="https://min-zou.github.io/record.github.io"/>
+
+
+
+<meta itemprop="keywords" content="hexo," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://min-zou.github.io/record.github.io"/>
+
+<meta name="twitter:title" content="Generate Blog with Hexo"/>
+<meta name="twitter:description" content="从零开始在hexo&#43;github&#43;阿里云域名下搭建博客
+一、github page 设置 1、rep setting 新建github rep ， 命名为&lt;你的项目名&gt;.github.io
+2、ssh setting 进入用户设置setting，Personal settings下的SSH and GPG keys ，hit New SSH key
+获取当前pc的ssh key，获取方法见 粘贴获取到的key至github中
+3、connect setting 打开安装后的git(默认安装)，选择你的本地git仓库(在想放置仓库的位置新建文件夹‘git-test’)
+$ git clone https://github.com/your rep.git 在git bash或终端中添加用户名和邮箱，
+$ git config --global user.name &#34;your name&#34; $ git config --global user.email your email 4、git setting 在项目目录下进行一下操作即可提交代码：
+$ git add . $ git status #(查看修改的地方) $ git commit -m &#34;your information about commit&#34; # (必须添加说明) $ git push -u origin master （#first push with &#39;-u&#39;） 5、Domain Name setting 在阿里云注册域名，根据自己要求选择套餐"/>
+
+
+
+    <meta property="og:title" content="Generate Blog with Hexo" />
+<meta property="og:description" content="从零开始在hexo&#43;github&#43;阿里云域名下搭建博客
+一、github page 设置 1、rep setting 新建github rep ， 命名为&lt;你的项目名&gt;.github.io
+2、ssh setting 进入用户设置setting，Personal settings下的SSH and GPG keys ，hit New SSH key
+获取当前pc的ssh key，获取方法见 粘贴获取到的key至github中
+3、connect setting 打开安装后的git(默认安装)，选择你的本地git仓库(在想放置仓库的位置新建文件夹‘git-test’)
+$ git clone https://github.com/your rep.git 在git bash或终端中添加用户名和邮箱，
+$ git config --global user.name &#34;your name&#34; $ git config --global user.email your email 4、git setting 在项目目录下进行一下操作即可提交代码：
+$ git add . $ git status #(查看修改的地方) $ git commit -m &#34;your information about commit&#34; # (必须添加说明) $ git push -u origin master （#first push with &#39;-u&#39;） 5、Domain Name setting 在阿里云注册域名，根据自己要求选择套餐" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://min-zou.github.io/record.github.io/posts/2018/10/generate-blog-with-hexo/" />
+<meta property="og:image" content="https://min-zou.github.io/record.github.io"/>
+<meta property="article:published_time" content="2018-10-23T20:40:11+08:00" />
+<meta property="article:modified_time" content="2018-10-23T20:40:11+08:00" /><meta property="og:site_name" content="Hello World" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2018-10-23 20:40:11 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+    });
+</script>
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://min-zou.github.io/record.github.io" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">none:~/blog$ </span>
+            <span class="logo__text">Gooooo！</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li>
+            	<a href="https://min-zou.github.io/record.github.io/posts"><i class="iconfont icon-list"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/about_me"><i class="iconfont icon-about"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/extra"><i class="iconfont icon-fun"></i></a>
+            </li><li>
+            	<a href="https://min-zou.github.io/record.github.io/refs"><i class="iconfont icon-ref"></i></a>
+            </li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>One minute
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://min-zou.github.io/record.github.io/posts/2018/10/generate-blog-with-hexo/">Generate Blog with Hexo</a>
+            </h1>
+                <hr />
+                <aside id="toc">
+                <div class="toc-title">Table of Contents</div>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#一github-page-设置">一、github page 设置</a>
+      <ul>
+        <li><a href="#1rep-setting">1、rep setting</a></li>
+        <li><a href="#2ssh-setting">2、ssh setting</a></li>
+        <li><a href="#3connect-setting">3、connect setting</a></li>
+        <li><a href="#4git-setting">4、git setting</a></li>
+        <li><a href="#5domain-name-setting">5、Domain Name setting</a></li>
+      </ul>
+    </li>
+    <li><a href="#二hexo配置">二、hexo配置</a>
+      <ul>
+        <li><a href="#1hexo-install">1、hexo install</a></li>
+        <li><a href="#2部署hexo到github-page">2、部署hexo到github page</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </aside>
+                <hr />
+
+            
+
+            <div class="post-content">
+                <p>从零开始在hexo+github+阿里云域名下搭建博客</p>
+<h2 id="一github-page-设置">一、github page 设置</h2>
+<h3 id="1rep-setting">1、rep setting</h3>
+<p>新建github rep ， 命名为&lt;你的项目名&gt;.github.io</p>
+<h3 id="2ssh-setting">2、ssh setting</h3>
+<p>进入用户设置setting，Personal settings下的SSH and GPG keys ，hit New SSH key</p>
+<p>获取当前pc的ssh key，获取方法见
+粘贴获取到的key至github中</p>
+<h3 id="3connect-setting">3、connect setting</h3>
+<p>打开安装后的git(默认安装)，选择你的本地git仓库(在想放置仓库的位置新建文件夹‘git-test’)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/your rep.git
+</code></pre></div><p>在git bash或终端中添加用户名和邮箱，</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git config --global user.name <span style="color:#e6db74">&#34;your name&#34;</span>
+$ git config --global user.email your email
+</code></pre></div><h3 id="4git-setting">4、git setting</h3>
+<p>在项目目录下进行一下操作即可提交代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git add .
+$ git status <span style="color:#75715e">#(查看修改的地方)</span>
+
+$ git commit -m <span style="color:#e6db74">&#34;your information about commit&#34;</span> <span style="color:#75715e">#</span>
+<span style="color:#f92672">(</span>必须添加说明<span style="color:#f92672">)</span>
+$ git push -u origin master （#first push with <span style="color:#e6db74">&#39;-u&#39;</span>）
+</code></pre></div><h3 id="5domain-name-setting">5、Domain Name setting</h3>
+<p>在阿里云注册域名，根据自己要求选择套餐</p>
+<p>在域名控制台中选择域名解析，DNMA-www-10min-your rep&rsquo;s name(e.g. robot-github.github.io)</p>
+<p>完成后打开github在项目setting中修改Github Pages中的Custom domain，添加你的域名并save</p>
+<p>完成后关闭网页，此时已经可以通过自己的域名打开网页了，网页模板为新建github page rep时默认的主题</p>
+<h2 id="二hexo配置">二、hexo配置</h2>
+<h3 id="1hexo-install">1、hexo install</h3>
+<p>hexo安装需要git和node.js，git一般ubuntu默认安装，windows下在前文已经安装完毕，则是需要安装Node.js，官方下载及教程如下：</p>
+<p>官方下载地址：<a href="https://nodejs.org/download/">下载Node.js</a></p>
+<p>官方安装教程：<a href="http://www.runoob.com/nodejs/nodejs-install-setup.html">安装Node.js</a></p>
+<p>完成nodejs安装之后即可以安装hexo</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install hexo-cli -g
+$ cd git-test  <span style="color:#75715e">#也即前文设置的文件夹目录下</span>
+$ hexo init blog
+$ cd blog
+$ npm install
+$ hexo g  
+$ hexo s <span style="color:#75715e">#可以在http://localhost:4000/ 查看</span>
+</code></pre></div><p>hexo g 即hexo generate ，运行此命令会生成静态文件，在public文件夹中</p>
+<p>hexo s 则会启动本地web服务，类似sublime的预览</p>
+<p>More info: <a href="https://hexo.io/docs.html">官方文档</a></p>
+<h3 id="2部署hexo到github-page">2、部署hexo到github page</h3>
+<p>并没有使用deploy部署，参考<a href="https://segmentfault.com/a/1190000004947261">手把手&hellip;</a>博客中的做法使用git命令行部署，避免莫名其妙的问题</p>
+<p>具体做法如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd blog
+$ git clone https://github.com/your rep.git .deploy/your rep
+$ hexo g
+$ cp -r pblic/* .deploy/your rep
+$ cd .deploy/your rep
+$ <span style="color:#75715e">#一、4 git setting</span>
+</code></pre></div><p>提交完成之后即可打开购买的域名，查看网页了</p>
+<p>其余具体的博客撰写查看<a href="https://hexo.io/docs.html">官方文档</a>即可</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://min-zou.github.io/record.github.io/tags/hexo">hexo</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>171 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2018-10-23 20:40 &#43;0800</p>
+        </div>
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+                <span><a href="https://min-zou.github.io/record.github.io">Echo Rex</a></span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span> <a href="https://min-zou.github.io/record.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/record.github.io/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kinect on Hello World</title>
+    <link>https://min-zou.github.io/record.github.io/tags/kinect/</link>
+    <description>Recent content in Kinect on Hello World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 26 Oct 2018 15:23:06 +0800</lastBuildDate><atom:link href="https://min-zou.github.io/record.github.io/tags/kinect/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kinect_capture</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2018/10/kinect_capture/</link>
+      <pubDate>Fri, 26 Oct 2018 15:23:06 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2018/10/kinect_capture/</guid>
+      <description>&lt;p&gt;最近在跑离线ORBSLAM2，需要本地数据集。 手头靠谱点的相机暂时只有Kinect，还是一代。
+因此基本方法就是使用kinect去截取每帧图片，保存到本地。
+开源驱动libfreenect刚好提供了这一工具，驱动方式便选择libfreenect了。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

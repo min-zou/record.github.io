@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on Hello World</title>
+    <link>https://min-zou.github.io/record.github.io/tags/hugo/</link>
+    <description>Recent content in hugo on Hello World</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 08 May 2020 14:34:25 +0800</lastBuildDate><atom:link href="https://min-zou.github.io/record.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tohugo</title>
+      <link>https://min-zou.github.io/record.github.io/posts/2020/05/tohugo/</link>
+      <pubDate>Fri, 08 May 2020 14:34:25 +0800</pubDate>
+      
+      <guid>https://min-zou.github.io/record.github.io/posts/2020/05/tohugo/</guid>
+      <description>hugo折腾过程 记录博客从hexo迁移至hugo所遇到的问题 转向hugo也是因为hugo生成很快并且支持修改在线预览，同时也有hugo构建和使用很方便的原因。
+1. github page部署之后无法加载css和js 原因其实很简单，hugo编译静态站点时需要指定baseurl，本地预览时设置的localhost需要在生成静态页面时重新给定，即
+hugo --theme=hello-friend-ng --baseUrl=&amp;quot;https://xxx.github.io&amp;quot; 所使用的主题是hello-friend-ng，极简但还挺好看的。
+2. 页面menu点击后跳转错误 其实还是和baseurl相关，config.toml中设置的
+ [[menu.main]] identifier = &amp;quot;blog&amp;quot; name = &amp;quot;Record&amp;quot; pre = &amp;quot;&amp;lt;i class=&#39;fa fa-road&#39;&amp;gt;&amp;lt;/i&amp;gt;&amp;quot; url = &amp;quot;/posts&amp;quot; 其页面url是和baseurl不一致的，它会使用root路径，在使用github page部署时会出现问题，因此将canonifyURLs设置为false以寻找相对路径而不是直接绝对路径给定了。
+3.markdown中插入公式 在文件前加入
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; 即可使用latex编辑公式并显示。 例：
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$ 可显示为： $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
+4.增加标签 参考A simple shortcode to add tags for Hugo.
+ 🎊 dUpdddate 🎉 Add 🔩 Changed 💣 Warning 👻 Deprecated  5.增加menu图标 参考Hugo、Hexo博客搭建及Hugo的自定义配置 阿里云下载图标后解压至本地，将eot、svg、ttf、woff等不同平台支持的格式复制放入static/fonts/iconfont下，在assets/scss文件夹下找到_fonts.scss文件，在其中将下载的css文件中内容完整复制过来。
+同时文件路径src：url设置上述支持格式的路径并自定义名称，例：
+@font-face { font-family: &amp;quot;iconfont&amp;quot;; src: url(&#39;.</description>
+    </item>
+    
+  </channel>
+</rss>
